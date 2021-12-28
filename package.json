@@ -1,0 +1,25 @@
+{
+    "name": "spotify-connect",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "nodemon index.ts"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@types/express": "^4.17.13",
+        "@types/node": "^17.0.5",
+        "@types/react": "^17.0.38",
+        "@types/react-dom": "^17.0.11",
+        "axios": "^0.24.0",
+        "dotenv": "^10.0.0",
+        "express": "^4.17.2",
+        "typescript": "^4.5.4"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.15"
+    }
+}
