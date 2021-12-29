@@ -68,29 +68,27 @@ app.get('/callback', (req: Request, res: Response) => {
     })
         .then((response: AxiosResponse<any, any>) => {
             if (response.status === 200) {
-                const { refresh_token } = response.data;
-
-                axios
-                    .get(
-                        `http://localhost:8888/refresh_token?refresh_token=${refresh_token}`
-                    )
-                    .then((response: AxiosResponse<any, any>) => {
-                        res.send(
-                            `<pre>${JSON.stringify(
-                                response.data,
-                                null,
-                                2
-                            )}</pre>`
-                        );
-                    })
-                    .catch((error) => {
-                        res.send(error);
-                    });
+                const {
+                    access_token,
+                    refresh_token,
+                }: { access_token: string; refresh_token: string } =
+                    response.data;
+                const queryParams = querystring.stringify({
+                    access_token,
+                    refresh_token,
+                });
+                // Redirect to react app
+                res.redirect(`http://localhost:3000/?${queryParams}`);
+                // pass along tokens in query params
             } else {
-                res.send(response);
+                res.redirect(
+                    `/?${querystring.stringify({
+                        error: 'invalid_token',
+                    })}`
+                );
             }
         })
-        .catch((error) => res.send(error));
+        .catch((error: any) => res.send(error));
 });
 
 app.get('/refresh_token', (req: Request, res: Response) => {
@@ -113,7 +111,7 @@ app.get('/refresh_token', (req: Request, res: Response) => {
         .then((response: AxiosResponse<any, any>) => {
             res.send(response.data);
         })
-        .catch((error) => {
+        .catch((error: any) => {
             res.send(error);
         });
 });
