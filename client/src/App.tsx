@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { accessToken } from './spotify';
+import { accessToken, logout } from './spotify';
 
 const App = () => {
-    const [token, setToken] = useState<string | null>();
+    const [token, setToken] = useState<string | boolean | null>();
 
     useEffect(() => {
         setToken(accessToken);
@@ -20,7 +20,10 @@ const App = () => {
                     Login to Spotify
                 </a>
             ) : (
-                <h1>Logged in!</h1>
+                <div className="flex flex-col justify-center">
+                    <h1>Logged in!</h1>
+                    <button onClick={logout}>Log Out</button>
+                </div>
             )}
         </div>
     );
