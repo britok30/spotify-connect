@@ -8,7 +8,9 @@ import {
     Link,
     useLocation,
 } from 'react-router-dom';
-import { accessToken, logout, getCurrentUserProfile } from './spotify';
+import { accessToken, getCurrentUserProfile } from './spotify';
+import { LoginButton } from './components/LoginButton';
+import { Profile } from './components/Profile';
 
 const App = () => {
     const [token, setToken] = useState<string | boolean | null>();
@@ -54,7 +56,10 @@ const App = () => {
                             element={<h1>Playlist</h1>}
                         />
                         <Route path="/playlists" element={<h1>Playlists</h1>} />
-                        <Route path="/" element={<Home profile={profile} />} />
+                        <Route
+                            path="/"
+                            element={<Profile profile={profile} />}
+                        />
                     </Routes>
                 </Router>
             )}
@@ -72,43 +77,4 @@ const ScrollToTop = () => {
     }, [pathname]);
 
     return null;
-};
-
-const Home = ({
-    profile,
-}: {
-    profile: SpotifyApi.CurrentUsersProfileResponse;
-}) => (
-    <div className="flex flex-col justify-center items-start">
-        <button onClick={logout}>Log Out</button>
-
-        {profile && (
-            <div>
-                <h1 className="text-6xl">{profile.display_name}</h1>
-                <p className="text-lg">{profile.followers.total} Followers</p>
-                {profile.images.length && profile.images[0].url && (
-                    <img
-                        className="rounded"
-                        src={profile.images[0].url}
-                        alt="Avatar"
-                    />
-                )}
-            </div>
-        )}
-    </div>
-);
-
-const LoginButton = ({ href }: { href: string }) => {
-    return (
-        <button className="bg-green-500 my-5 mx-auto text-white py-3 px-5 rounded-3xl inline-block">
-            <a
-                className="text-4xl"
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                Login to Spotify
-            </a>
-        </button>
-    );
 };
