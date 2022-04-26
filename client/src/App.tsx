@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { SpotifyApi } from './types';
+
 import {
     BrowserRouter as Router,
     Route,
@@ -10,14 +12,18 @@ import { accessToken, logout, getCurrentUserProfile } from './spotify';
 
 const App = () => {
     const [token, setToken] = useState<string | boolean | null>();
-    const [profile, setProfile] = useState(null);
+    const [profile, setProfile] =
+        useState<SpotifyApi.CurrentUsersProfileResponse>(null);
 
     useEffect(() => {
         setToken(accessToken);
 
         const fetchData = async () => {
             try {
-                const { data } = await getCurrentUserProfile();
+                const {
+                    data,
+                }: { data: SpotifyApi.CurrentUsersProfileResponse } =
+                    await getCurrentUserProfile();
                 setProfile(data);
             } catch (e: any) {
                 console.log(e);
@@ -30,14 +36,7 @@ const App = () => {
     return (
         <div className="bg-gray-900 h-screen flex justify-center items-center text-white">
             {!token ? (
-                <a
-                    className="text-5xl"
-                    href="http://localhost:8888/login"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Login to Spotify
-                </a>
+                <LoginButton href="http://localhost:8888/login" />
             ) : (
                 <Router>
                     <ScrollToTop />
@@ -75,7 +74,11 @@ const ScrollToTop = () => {
     return null;
 };
 
-const Home = ({ profile }) => (
+const Home = ({
+    profile,
+}: {
+    profile: SpotifyApi.CurrentUsersProfileResponse;
+}) => (
     <div className="flex flex-col justify-center items-start">
         <button onClick={logout}>Log Out</button>
 
@@ -94,3 +97,18 @@ const Home = ({ profile }) => (
         )}
     </div>
 );
+
+const LoginButton = ({ href }: { href: string }) => {
+    return (
+        <button className="bg-green-500 my-5 mx-auto text-white py-3 px-5 rounded-3xl inline-block">
+            <a
+                className="text-4xl"
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Login to Spotify
+            </a>
+        </button>
+    );
+};
