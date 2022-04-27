@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { SpotifyApi } from '../types';
-import { getCurrentUserProfile, getCurrentUserPlaylists } from '../spotify';
+import {
+    getCurrentUserProfile,
+    getCurrentUserPlaylists,
+    getTopArtists,
+} from '../spotify';
 
 export const Profile = () => {
     const [profile, setProfile] =
@@ -9,19 +13,30 @@ export const Profile = () => {
     const [playlists, setPlaylists] =
         useState<SpotifyApi.ListOfCurrentUsersPlaylistsResponse | null>(null);
 
+    const [topArtists, setTopArtists] = useState<
+        SpotifyApi.UsersTopArtistsResponse[] | null
+    >(null);
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const userProfileResponse = await getCurrentUserProfile();
+                const userProfileRes = await getCurrentUserProfile();
                 const userProfileData: SpotifyApi.CurrentUsersProfileResponse =
-                    userProfileResponse.data;
+                    userProfileRes.data;
 
-                const userPlaylistsResponse = await getCurrentUserPlaylists();
+                const userPlaylistsRes = await getCurrentUserPlaylists();
                 const userPlaylistData: SpotifyApi.ListOfCurrentUsersPlaylistsResponse =
-                    userPlaylistsResponse.data;
+                    userPlaylistsRes.data;
+
+                const topArtistsRes = await getTopArtists('long_term');
+                const topArtistsData: SpotifyApi.UsersTopArtistsResponse[] =
+                    topArtistsRes.data.items;
 
                 setProfile(userProfileData);
                 setPlaylists(userPlaylistData);
+                setTopArtists(topArtistsData);
+
+                console.log('top', topArtists);
             } catch (e: any) {
                 console.log(e);
             }
@@ -56,7 +71,7 @@ export const Profile = () => {
                                         {playlists.total !== 1 ? 's' : ''}
                                     </span>
                                 )}
-                                <div className="mx-1">-</div>
+                                <span className="mx-1">-</span>
                                 <span>
                                     {profile.followers.total} Follower
                                     {profile.followers.total !== 1 ? 's' : ''}
