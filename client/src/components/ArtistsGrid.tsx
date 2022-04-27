@@ -8,7 +8,7 @@ export const ArtistsGrid = ({
 }) => (
     <>
         {artists && artists.length ? (
-            <ul className="list-none m-0 p-0 grid gap-3 grid-cols-5">
+            <ul className="list-none m-0 p-0 grid gap-3 grid-cols-1 md:grid-cols-3 lg:grid-cols-5">
                 {artists.map((artist, i) => (
                     <li
                         className="cursor-default rounded-lg bg-neutral-900 hover:scale-105 transition-all ease-out duration-300 shadow-md"
