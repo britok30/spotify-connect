@@ -58,7 +58,7 @@ const TrackList = ({
                 ))}
             </div>
         ) : (
-            <p className="text-white">No tracks available</p>
+            <p className="text-white font-bold text-lg">No tracks available</p>
         )}
     </>
 );
