@@ -518,7 +518,7 @@ export declare namespace SpotifyApi {
      * GET /v1/me/top/{type}
      * https://developer.spotify.com/web-api/get-users-top-artists-and-tracks/
      */
-    interface UsersTopTracksResponse extends PagingObject<TrackObjectFull> {}
+    interface UsersTopTracksResponse extends TrackObjectFull {}
 
     /**
      * Get a User’s Recently Played Tracks
