@@ -24,7 +24,7 @@ export const ArtistsGrid = ({
                                     />
                                 </div>
                             )}
-                            <h3 className="grid__item__name overflow-ellipsis">
+                            <h3 className="mb-2 text-sm overflow-ellipsis">
                                 {artist.name}
                             </h3>
                             <p className="text-sm text-gray-500">Artist</p>
