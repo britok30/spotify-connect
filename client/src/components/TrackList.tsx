@@ -51,7 +51,7 @@ const TrackList = ({
                         <div className="overflow-ellipsis text-sm hidden md:block md:whitespace-nowrap">
                             {track.album.name}
                         </div>
-                        <div className="hidden md:flex md:justify-end md:tabular-nums">
+                        <div className="hidden font-thin md:flex md:justify-end md:tabular-nums">
                             {formatDuration(track.duration_ms)}
                         </div>
                     </li>
