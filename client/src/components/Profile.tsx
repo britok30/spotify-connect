@@ -5,6 +5,8 @@ import {
     getCurrentUserPlaylists,
     getTopArtists,
 } from '../spotify';
+import SectionWrapper from './SectionWrapper';
+import { ArtistsGrid } from './ArtistsGrid';
 
 export const Profile = () => {
     const [profile, setProfile] =
@@ -48,7 +50,7 @@ export const Profile = () => {
     return (
         <>
             {profile && (
-                <div className="flex items-end relative max-h-[500px] min-h-[250px] h-[30vh] bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 md:min-h-[340px]">
+                <div className="flex items-end relative max-h-[500px] min-h-[250px] h-[30vh] bg-gradient-to-r from-black to-gray-300  md:min-h-[340px]">
                     <div className="flex items-end w-full max-w-[1300px] mx-auto py-6 px-4 md:py-8 md:px-16">
                         {profile.images.length && profile.images[0].url && (
                             <img
@@ -81,6 +83,13 @@ export const Profile = () => {
                     </div>
                 </div>
             )}
+
+            <SectionWrapper
+                title="Top artists this month"
+                seeAllLink={'/top-artists'}
+            >
+                <ArtistsGrid artists={topArtists?.slice(0, 10)} />
+            </SectionWrapper>
         </>
     );
 };

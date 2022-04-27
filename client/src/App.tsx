@@ -19,7 +19,7 @@ const App = () => {
     }, []);
 
     return (
-        <div className="bg-gray-900 h-screen  text-white">
+        <div className="h-full text-white bg-neutral-700">
             {!token ? (
                 <LoginButton href="http://localhost:8888/login" />
             ) : (

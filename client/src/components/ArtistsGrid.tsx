@@ -8,13 +8,17 @@ export const ArtistsGrid = ({
 }) => (
     <>
         {artists && artists.length ? (
-            <ul className="list-none m-0 p-0 grid">
+            <ul className="list-none m-0 p-0 grid gap-3 grid-cols-5">
                 {artists.map((artist, i) => (
-                    <li className="grid__item" key={i}>
-                        <div className="grid__item__inner">
+                    <li
+                        className="cursor-default rounded-lg bg-neutral-900 hover:scale-105 transition-all ease-out duration-300 shadow-md"
+                        key={i}
+                    >
+                        <div className="p-3 md:p-4">
                             {artist.images[0] && (
-                                <div className="grid__item__img">
+                                <div className="relative pt-[100%] mx-auto mb-6">
                                     <img
+                                        className="object-cover w-full h-full absolute top-0 rounded-full"
                                         src={artist.images[0].url}
                                         alt={artist.name}
                                     />
@@ -23,7 +27,7 @@ export const ArtistsGrid = ({
                             <h3 className="grid__item__name overflow-ellipsis">
                                 {artist.name}
                             </h3>
-                            <p className="grid__item__label">Artist</p>
+                            <p className="text-sm text-gray-500">Artist</p>
                         </div>
                     </li>
                 ))}
