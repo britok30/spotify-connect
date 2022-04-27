@@ -18,7 +18,7 @@ const App = () => {
     }, []);
 
     return (
-        <div className="h-full text-white bg-neutral-800 relative">
+        <div className="h-full text-white bg-neutral-900 relative">
             {!token ? (
                 <LoginButton href="http://localhost:8888/login" />
             ) : (
