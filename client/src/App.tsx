@@ -19,12 +19,15 @@ const App = () => {
     }, []);
 
     return (
-        <div className="h-full text-white bg-neutral-700">
+        <div className="h-full text-white bg-neutral-800 relative">
             {!token ? (
                 <LoginButton href="http://localhost:8888/login" />
             ) : (
                 <>
-                    <button className="absolute text-white round-lg" onClick={logout}>
+                    <button
+                        className="absolute z-10 text-white rounded-full p-3 text-sm bg-black top-1 right-2"
+                        onClick={logout}
+                    >
                         Log Out
                     </button>
                     <Router>
