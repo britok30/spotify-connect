@@ -62,7 +62,7 @@ export const Profile = () => {
         <>
             <header>
                 {profile && (
-                    <div className="flex items-end relative max-h-[500px] min-h-[250px] h-[30vh] bg-gradient-to-r from-black to-gray-400  md:min-h-[340px]">
+                    <div className="flex items-end relative max-h-[500px] min-h-[250px] h-[30vh] bg-gradient-to-t from-orange-400 to-sky-400  md:min-h-[340px]">
                         <div className="flex items-end w-full max-w-[1300px] mx-auto py-6 px-4 md:py-8 md:px-16">
                             {profile.images.length && profile.images[0].url && (
                                 <img
@@ -105,7 +105,7 @@ export const Profile = () => {
                         title="Top artists this month"
                         seeAllLink={'/top-artists'}
                     >
-                        <ArtistsGrid artists={topArtists?.slice(0, 10)} />
+                        <ArtistsGrid artists={topArtists?.slice(0, 12)} />
                     </SectionWrapper>
 
                     <SectionWrapper
