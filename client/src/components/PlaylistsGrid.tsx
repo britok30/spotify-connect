@@ -28,16 +28,18 @@ const PlaylistsGrid = ({
                                     />
                                 </div>
                             )}
-                            <h3 className="grid__item__name overflow-ellipsis">
+                            <h3 className="text-white text-sm overflow-ellipsis">
                                 {playlist.name}
                             </h3>
-                            <p className="grid__item__label">Playlist</p>
+                            <p className="text-gray-300 text-xs font-thin">
+                                Playlist
+                            </p>
                         </Link>
                     </li>
                 ))}
             </ul>
         ) : (
-            <p className="empty-notice">No playlists available</p>
+            <p className="text-white font-bold text-lg">No playlists available</p>
         )}
     </>
 );
