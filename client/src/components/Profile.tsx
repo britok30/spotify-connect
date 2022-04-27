@@ -4,9 +4,11 @@ import {
     getCurrentUserProfile,
     getCurrentUserPlaylists,
     getTopArtists,
+    getTopTracks,
 } from '../spotify';
 import SectionWrapper from './SectionWrapper';
 import { ArtistsGrid } from './ArtistsGrid';
+import TrackList from './TrackList';
 
 export const Profile = () => {
     const [profile, setProfile] =
@@ -17,6 +19,10 @@ export const Profile = () => {
 
     const [topArtists, setTopArtists] = useState<
         SpotifyApi.UsersTopArtistsResponse[] | null
+    >(null);
+
+    const [topTracks, setTopTracks] = useState<
+        SpotifyApi.UsersTopTracksResponse[] | null
     >(null);
 
     useEffect(() => {
@@ -34,11 +40,16 @@ export const Profile = () => {
                 const topArtistsData: SpotifyApi.UsersTopArtistsResponse[] =
                     topArtistsRes.data.items;
 
+                const topTracksRes = await getTopTracks('long_term');
+                const topTracksData: SpotifyApi.UsersTopTracksResponse[] =
+                    topTracksRes.data.items;
+
                 setProfile(userProfileData);
                 setPlaylists(userPlaylistData);
                 setTopArtists(topArtistsData);
+                setTopTracks(topTracksData);
 
-                console.log('top', topArtists);
+                console.log(topTracksData);
             } catch (e: any) {
                 console.log(e);
             }
@@ -50,7 +61,7 @@ export const Profile = () => {
     return (
         <>
             {profile && (
-                <div className="flex items-end relative max-h-[500px] min-h-[250px] h-[30vh] bg-gradient-to-r from-black to-gray-300  md:min-h-[340px]">
+                <div className="flex items-end relative max-h-[500px] min-h-[250px] h-[30vh] bg-gradient-to-r from-black to-gray-400  md:min-h-[340px]">
                     <div className="flex items-end w-full max-w-[1300px] mx-auto py-6 px-4 md:py-8 md:px-16">
                         {profile.images.length && profile.images[0].url && (
                             <img
@@ -83,13 +94,23 @@ export const Profile = () => {
                     </div>
                 </div>
             )}
+            {topArtists && topTracks && (
+                <main className="mt-5">
+                    <SectionWrapper
+                        title="Top artists this month"
+                        seeAllLink={'/top-artists'}
+                    >
+                        <ArtistsGrid artists={topArtists?.slice(0, 10)} />
+                    </SectionWrapper>
 
-            <SectionWrapper
-                title="Top artists this month"
-                seeAllLink={'/top-artists'}
-            >
-                <ArtistsGrid artists={topArtists?.slice(0, 10)} />
-            </SectionWrapper>
+                    <SectionWrapper
+                        title="Top tracks this month"
+                        seeAllLink="/top-tracks"
+                    >
+                        <TrackList tracks={topTracks?.slice(0, 10)} />
+                    </SectionWrapper>
+                </main>
+            )}
         </>
     );
 };
