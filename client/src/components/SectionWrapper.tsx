@@ -9,14 +9,14 @@ const SectionWrapper = ({
 }: {
     children: React.ReactNode;
     title: string;
-    seeAllLink: string;
+    seeAllLink?: string;
     breadcrumb?: boolean;
 }) => (
-    <div className="first-of-type:pt-0 w-full max-w-[1300px] my-0 mx-auto py-6 px-4 md:py-8 md:px-16">
+    <div className="first-of-type:pt-0 w-full max-w-[1300px] h-full min-h-screen my-0 mx-auto px-4 md:py-8 md:px-16">
         <div className="flex justify-between items-stretch mb-8">
-            <h2 className="flex m-0 text-xl">
+            <h2 className="flex mt-6 text-xl">
                 {breadcrumb && (
-                    <span className="flex text-gray-300">
+                    <span className="flex text-gray-300 mr-3">
                         <Link to="/">Profile</Link>
                     </span>
                 )}
