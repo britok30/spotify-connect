@@ -76,7 +76,7 @@ export const Profile = () => {
                                 <span className="text-xs font-bold mb-2 uppercase">
                                     Profile
                                 </span>
-                                <h1 className="text-6xl font-extrabold leading-[1] mb-2 md:ml-[-5px]">
+                                <h1 className="text-6xl md:text-8xl  font-extrabold leading-[1] mb-2 md:ml-[-5px]">
                                     {profile.display_name}
                                 </h1>
                                 <p className="flex items-center m-0 text-sm font-light text-gray-100">
