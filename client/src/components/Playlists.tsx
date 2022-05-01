@@ -10,19 +10,19 @@ const Playlists = () => {
     >(null);
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
+        try {
+            const fetchData = async () => {
                 const userPlaylistsRes = await getCurrentUserPlaylists();
                 const userPlaylistData: SpotifyApi.ListOfCurrentUsersPlaylistsResponse[] =
                     userPlaylistsRes.data.items;
 
                 setPlaylists(userPlaylistData);
-            } catch (e: any) {
-                console.log(e);
-            }
-        };
+            };
 
-        fetchData();
+            fetchData();
+        } catch (e: any) {
+            console.log(e);
+        }
     }, [playlists]);
 
     return (
