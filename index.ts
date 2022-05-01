@@ -4,11 +4,16 @@ import axios, { AxiosResponse } from 'axios';
 
 const app: Express = express();
 const querystring = require('querystring');
-const PORT: number = 8888;
+const path = require('path');
 
 const CLIENT_ID: string = process.env.CLIENT_ID;
 const CLIENT_SECRET: string = process.env.CLIENT_SECRET;
 const REDIRECT_URI: string = process.env.REDIRECT_URI;
+const FRONTEND_URI = process.env.FRONTEND_URI;
+const PORT = process.env.PORT || 8888;
+
+// Priority serve any static files.
+app.use(express.static(path.resolve(__dirname, './client/build')));
 
 app.get('/', (req: Request, res: Response) => {
     res.send('Hello world');
@@ -87,7 +92,7 @@ app.get('/callback', (req: Request, res: Response) => {
                     expires_in,
                 });
                 // Redirect to react app
-                res.redirect(`http://localhost:3000/?${queryParams}`);
+                res.redirect(`${FRONTEND_URI}/?${queryParams}`);
                 // pass along tokens in query params
             } else {
                 res.redirect(
@@ -123,6 +128,11 @@ app.get('/refresh_token', (req: Request, res: Response) => {
         .catch((error: any) => {
             res.send(error);
         });
+});
+
+// All remaining requests return the React app, so it can handle routing.
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, './client/build', 'index.html'));
 });
 
 app.listen(PORT, () => {

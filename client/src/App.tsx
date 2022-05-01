@@ -22,10 +22,15 @@ const App = () => {
         setToken(accessToken);
     }, []);
 
+    const LOGIN_URI =
+        process.env.NODE_ENV !== 'production'
+            ? 'http://localhost:8888/login'
+            : 'https://spotify-connect-v1.herokuapp.com/login';
+
     return (
         <div className="text-white bg-neutral-900 h-full relative">
             {!token ? (
-                <LoginButton href="http://localhost:8888/login" />
+                <LoginButton href={LOGIN_URI} />
             ) : (
                 <>
                     <button
