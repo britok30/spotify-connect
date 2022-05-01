@@ -149,7 +149,7 @@ export const getCurrentUserProfile = (): Promise<any> => axios.get('/me');
  * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-a-list-of-current-users-playlists
  * @returns {Promise}
  */
-export const getCurrentUserPlaylists = (limit = 20) => {
+export const getCurrentUserPlaylists = (limit = 20): Promise<any> => {
     return axios.get(`/me/playlists?limit=${limit}`);
 };
 
@@ -169,6 +169,28 @@ export const getTopArtists = (time_range = 'short_term') => {
  * @param {string} time_range - 'short_term' (last 4 weeks) 'medium_term' (last 6 months) or 'long_term' (calculated from several years of data and including all new data as it becomes available). Defaults to 'short_term'
  * @returns {Promise}
  */
-export const getTopTracks = (time_range: string = 'short_term'): Promise<any> => {
+export const getTopTracks = (
+    time_range: string = 'short_term'
+): Promise<any> => {
     return axios.get(`/me/top/tracks?time_range=${time_range}`);
+};
+
+/**
+ * Get a Playlist
+ * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-playlist
+ * @param {string} playlist_id - The Spotify ID for the playlist.
+ * @returns {Promise}
+ */
+export const getPlaylistById = (playlist_id: string): Promise<any> => {
+    return axios.get(`/playlists/${playlist_id}`);
+};
+
+/**
+ * Get a Artist
+ * https://developer.spotify.com/console/get-artist/
+ * @param {string} artist_id - The Spotify ID for the artist.
+ * @returns {Promise}
+ */
+export const getArtistById = (artist_id: string): Promise<any> => {
+    return axios.get(`/artists/${artist_id}`);
 };

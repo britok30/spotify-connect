@@ -10,6 +10,7 @@ import SectionWrapper from './SectionWrapper';
 import { ArtistsGrid } from './ArtistsGrid';
 import TrackList from './TrackList';
 import PlaylistsGrid from './PlaylistsGrid';
+import Loader from './Loader';
 
 export const Profile = () => {
     const [profile, setProfile] =
@@ -99,26 +100,28 @@ export const Profile = () => {
                 )}
             </header>
 
-            {topArtists && topTracks && (
+            {topArtists && topTracks ? (
                 <main className="mt-5">
                     <SectionWrapper
                         title="Top artists this month"
                         seeAllLink={'/top-artists'}
                     >
-                        <ArtistsGrid artists={topArtists?.slice(0, 12)} />
+                        <ArtistsGrid artists={topArtists.slice(0, 12)} />
                     </SectionWrapper>
 
                     <SectionWrapper
                         title="Top tracks this month"
                         seeAllLink="/top-tracks"
                     >
-                        <TrackList tracks={topTracks?.slice(0, 10)} />
+                        <TrackList tracks={topTracks.slice(0, 10)} />
                     </SectionWrapper>
 
                     <SectionWrapper title="Playlists" seeAllLink="/playlists">
                         <PlaylistsGrid playlists={playlists.slice(0, 10)} />
                     </SectionWrapper>
                 </main>
+            ) : (
+                <Loader />
             )}
         </>
     );

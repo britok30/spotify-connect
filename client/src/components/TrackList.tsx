@@ -12,7 +12,7 @@ const TrackList = ({
             <div>
                 {tracks.map((track, i) => (
                     <li
-                        className="grid items-center grid-cols-1 gap-4 text-gray-300 rounded-sm hover:bg-neutral-700 transition-all duration-300 ease-in-out cursor-pointer p-1"
+                        className="grid items-center grid-cols-1 gap-4 text-gray-300 rounded-sm hover:bg-neutral-700 transition-all duration-300 ease-in-out cursor-default p-1"
                         key={i}
                         style={{
                             gridTemplateColumns:

@@ -12,6 +12,8 @@ import { Profile } from './components/Profile';
 import TopArtists from './components/TopArtists';
 import TopTracks from './components/TopTracks';
 import Playlists from './components/Playlists';
+import Playlist from './components/Playlist';
+import Artist from './components/Artist';
 
 const App = () => {
     const [token, setToken] = useState<string | boolean | null>();
@@ -39,10 +41,11 @@ const App = () => {
                                 path="/top-artists"
                                 element={<TopArtists />}
                             />
+                            <Route path="/artists/:id" element={<Artist />} />
                             <Route path="/top-tracks" element={<TopTracks />} />
                             <Route
                                 path="/playlists/:id"
-                                element={<h1>Playlist</h1>}
+                                element={<Playlist />}
                             />
                             <Route path="/playlists" element={<Playlists />} />
                             <Route path="/" element={<Profile />} />

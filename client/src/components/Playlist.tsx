@@ -9,8 +9,6 @@ const Playlist = () => {
     const { id } = useParams();
     const [playlist, setPlaylist] = useState(null);
     const [tracks, setTracks] = useState<any[] | null>(null);
-    const [audioFeatures, setAudioFeatures] =
-        useState<SpotifyApi.AudioFeaturesResponse[]>(null);
 
     useEffect(() => {
         try {
