@@ -11,6 +11,7 @@ import { LoginButton } from './components/LoginButton';
 import { Profile } from './components/Profile';
 import TopArtists from './components/TopArtists';
 import TopTracks from './components/TopTracks';
+import Playlists from './components/Playlists';
 
 const App = () => {
     const [token, setToken] = useState<string | boolean | null>();
@@ -43,10 +44,7 @@ const App = () => {
                                 path="/playlists/:id"
                                 element={<h1>Playlist</h1>}
                             />
-                            <Route
-                                path="/playlists"
-                                element={<h1>Playlists</h1>}
-                            />
+                            <Route path="/playlists" element={<Playlists />} />
                             <Route path="/" element={<Profile />} />
                         </Routes>
                     </Router>
