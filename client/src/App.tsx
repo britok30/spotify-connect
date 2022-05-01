@@ -9,6 +9,7 @@ import {
 import { accessToken, logout } from './spotify';
 import { LoginButton } from './components/LoginButton';
 import { Profile } from './components/Profile';
+import TopArtists from './components/TopArtists';
 
 const App = () => {
     const [token, setToken] = useState<string | boolean | null>();
@@ -18,13 +19,13 @@ const App = () => {
     }, []);
 
     return (
-        <div className="h-full text-white bg-neutral-900 relative">
+        <div className="text-white bg-neutral-900 h-full relative">
             {!token ? (
                 <LoginButton href="http://localhost:8888/login" />
             ) : (
                 <>
                     <button
-                        className="absolute z-10 text-white rounded-full p-3 text-sm bg-black top-1 right-2"
+                        className="absolute z-10 text-white rounded-full p-3 text-sm bg-black top-1 right-2 mt-4"
                         onClick={logout}
                     >
                         Log Out
@@ -34,7 +35,7 @@ const App = () => {
                         <Routes>
                             <Route
                                 path="/top-artists"
-                                element={<h1>Top Artists</h1>}
+                                element={<TopArtists />}
                             />
                             <Route
                                 path="/top-tracks"
