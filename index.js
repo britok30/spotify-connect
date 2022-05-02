@@ -1,6 +1,6 @@
 require('dotenv').config();
-import express from 'express';
-import axios from 'axios';
+const express = require('express');
+const axios = require('axios');
 
 const app = express();
 const querystring = require('querystring');
