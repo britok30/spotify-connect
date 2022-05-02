@@ -1,21 +1,21 @@
 require('dotenv').config();
-import express, { Express, query, Request, Response } from 'express';
-import axios, { AxiosResponse } from 'axios';
+import express from 'express';
+import axios from 'axios';
 
-const app: Express = express();
+const app = express();
 const querystring = require('querystring');
 const path = require('path');
 
-const CLIENT_ID: string = process.env.CLIENT_ID;
-const CLIENT_SECRET: string = process.env.CLIENT_SECRET;
-const REDIRECT_URI: string = process.env.REDIRECT_URI;
+const CLIENT_ID = process.env.CLIENT_ID;
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
+const REDIRECT_URI = process.env.REDIRECT_URI;
 const FRONTEND_URI = process.env.FRONTEND_URI;
 const PORT = process.env.PORT || 8888;
 
 // Priority serve any static files.
 app.use(express.static(path.resolve(__dirname, './client/build')));
 
-app.get('/', (req: Request, res: Response) => {
+app.get('/', (req, res) => {
     res.send('Hello world');
 });
 
@@ -24,9 +24,9 @@ app.get('/', (req: Request, res: Response) => {
  * @param  {number} length The length of the string
  * @return {string} The generated string
  */
-const generateRandomString = (length: number): string => {
-    let text: string = '';
-    const possible: string =
+const generateRandomString = (length) => {
+    let text = '';
+    const possible =
         'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     for (let i = 0; i < length; i++) {
         text += possible.charAt(Math.floor(Math.random() * possible.length));
@@ -36,7 +36,7 @@ const generateRandomString = (length: number): string => {
 
 const stateKey = 'spotify_auth_state';
 
-app.get('/login', (req: Request, res: Response) => {
+app.get('/login', (req, res) => {
     const state = generateRandomString(16);
     res.cookie(stateKey, state);
 
@@ -57,7 +57,7 @@ app.get('/login', (req: Request, res: Response) => {
     res.redirect(`https://accounts.spotify.com/authorize?${queryParams}`);
 });
 
-app.get('/callback', (req: Request, res: Response) => {
+app.get('/callback', (req, res) => {
     const code = req.query.code || null;
 
     axios({
@@ -75,17 +75,10 @@ app.get('/callback', (req: Request, res: Response) => {
             ).toString('base64')}`,
         },
     })
-        .then((response: AxiosResponse<any, any>) => {
+        .then((response) => {
             if (response.status === 200) {
-                const {
-                    access_token,
-                    refresh_token,
-                    expires_in,
-                }: {
-                    access_token: string;
-                    refresh_token: string;
-                    expires_in: number;
-                } = response.data;
+                const { access_token, refresh_token, expires_in } =
+                    response.data;
                 const queryParams = querystring.stringify({
                     access_token,
                     refresh_token,
@@ -102,10 +95,10 @@ app.get('/callback', (req: Request, res: Response) => {
                 );
             }
         })
-        .catch((error: any) => res.send(error));
+        .catch((error) => res.send(error));
 });
 
-app.get('/refresh_token', (req: Request, res: Response) => {
+app.get('/refresh_token', (req, res) => {
     const { refresh_token } = req.query;
 
     axios({
@@ -122,10 +115,10 @@ app.get('/refresh_token', (req: Request, res: Response) => {
             ).toString('base64')}`,
         },
     })
-        .then((response: AxiosResponse<any, any>) => {
+        .then((response) => {
             res.send(response.data);
         })
-        .catch((error: any) => {
+        .catch((error) => {
             res.send(error);
         });
 });
