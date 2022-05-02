@@ -2,6 +2,13 @@
 
 Spotify app built using TypeScript, React, Tailwind, and Spotify's API. Deployed on Heroku
 
+<img width="1439" alt="Screen Shot 2022-05-01 at 7 15 40 PM" src="https://user-images.githubusercontent.com/52144063/166171034-86cf60d5-93eb-4d8a-9d84-44d88fbb4422.png">
+
+<img width="1439" alt="Screen Shot 2022-05-01 at 7 15 47 PM" src="https://user-images.githubusercontent.com/52144063/166171046-85e80eed-da33-4c9d-84dd-1e4849f73763.png">
+
+<img width="1439" alt="Screen Shot 2022-05-01 at 7 15 34 PM" src="https://user-images.githubusercontent.com/52144063/166171050-2a1dc046-6d25-4162-be64-1bc00fee351c.png">
+
+
 ## Local Installation & Set Up
 
 1. Register a Spotify App in your [Spotify Developer Dashboard](https://developer.spotify.com/dashboard/) and add `http://localhost:8888/callback` as a Redirect URI in the app settings
