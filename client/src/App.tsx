@@ -34,7 +34,7 @@ const App = () => {
       ) : (
         <>
           <button
-            className="absolute z-10 text-white rounded-full p-3 text-sm bg-black top-1 right-2  mt-4"
+            className="absolute z-10 text-white rounded-full p-3 text-sm bg-black top-1 right-2 mt-4"
             onClick={logout}
           >
             Log Out
